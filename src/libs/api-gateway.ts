@@ -9,5 +9,6 @@ export const formatJSONResponse = (response: Record<string, unknown>, statusCode
   return {
     statusCode,
     body: JSON.stringify(response),
+    headers: { 'Content-Type': 'application/json' },
   };
 };
