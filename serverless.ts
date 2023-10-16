@@ -4,6 +4,8 @@ import getProductsList from '@functions/get-products-list';
 import getProductById from '@functions/get-product-by-id';
 
 const serverlessConfiguration: AWS = {
+  org: 'cngman',
+  app: 'shop-cloudx-epam',
   service: 'shop-cloudx-backend',
   frameworkVersion: '3',
   plugins: ['serverless-esbuild'],
@@ -20,7 +22,6 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
     },
   },
-  // import the function via paths
   functions: { getProductsList, getProductById },
   package: { individually: true },
   custom: {
@@ -34,6 +35,7 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10,
     },
+    secrets: '${file(secrets.json)}',
   },
 };
 

@@ -6,7 +6,7 @@ const getProductById = async (event, _context, callback) => {
   const product = PRODUCTS.find((p) => p.id === productId);
 
   if (!product) {
-    return callback(new Error('[404] Not Found'));
+    callback(null, { statusCode: 404, body: JSON.stringify({ error: 'Not Found' }) });
   }
 
   return formatJSONResponse({
