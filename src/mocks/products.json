@@ -1,0 +1,58 @@
+{
+  "products": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1600275"
+          },
+          "title": {
+            "S": "Christopher Flowers"
+          },
+          "description": {
+            "S": "Do ut ea Lorem occaecat."
+          },
+          "price": {
+            "N": "10.99"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1600276"
+          },
+          "title": {
+            "S": "Douglas Santos"
+          },
+          "description": {
+            "S": "Enim elit ad ea ad aliquip Lorem."
+          },
+          "price": {
+            "N": "10.99"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "fc112dee4d8b"
+          },
+          "title": {
+            "S": "Luke Scott"
+          },
+          "description": {
+            "S": "Do nisi occaecat excepteur elit amet occaecat nisi."
+          },
+          "price": {
+            "N": "10.99"
+          }
+        }
+      }
+    }
+  ]
+}

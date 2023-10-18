@@ -1,0 +1,8 @@
+{
+  "body": {
+    "title": "sample 1",
+    "description": "sample 2",
+    "price": 123,
+    "count": 321
+  }
+}
