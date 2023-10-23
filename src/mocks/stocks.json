@@ -1,0 +1,40 @@
+{
+  "stocks": [
+    {
+      "PutRequest": {
+        "Item": {
+          "product_id": {
+            "S": "1600275"
+          },
+          "count": {
+            "N": "20"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "product_id": {
+            "S": "1600276"
+          },
+          "count": {
+            "N": "10"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "product_id": {
+            "S": "fc112dee4d8b"
+          },
+          "count": {
+            "N": "5"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import type { AWS } from '@serverless/typescript';
 
 import getProductsList from '@functions/get-products-list';
 import getProductById from '@functions/get-product-by-id';
+import createProduct from '@functions/create-product';
 
 const serverlessConfiguration: AWS = {
   org: 'cngman',
@@ -20,9 +21,12 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      PRODUCT_TABLE: 'products',
+      STOCK_TABLE: 'stocks',
     },
+    iamRoleStatements: [{ Effect: 'Allow', Action: ['dynamodb:*'], Resource: '*' }],
   },
-  functions: { getProductsList, getProductById },
+  functions: { getProductsList, getProductById, createProduct },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -35,7 +39,7 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10,
     },
-    secrets: '${file(secrets.json)}',
+    secrets: 'file(secrets.json)',
   },
 };
 

@@ -93,3 +93,15 @@ The project code base is mainly located within the `src` folder. This folder is 
 ### Advanced usage
 
 Any tsconfig.json can be used, but if you do, set the environment variable `TS_NODE_CONFIG` for building the application, eg `TS_NODE_CONFIG=./tsconfig.app.json npx serverless webpack`
+
+### Batch Write to DynamoDB
+
+`aws dynamodb batch-write-item --request-items file://src/mocks/products.json --region eu-west-1 `
+
+`aws dynamodb batch-write-item --request-items file://src/mocks/stocks.json --region eu-west-1`
+
+
+### CloudFront distribution
+
+`https://d7c7mt7bdlgm7.cloudfront.net/`
+
