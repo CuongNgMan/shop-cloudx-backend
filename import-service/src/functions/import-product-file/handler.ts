@@ -1,13 +1,13 @@
 import { formatJSONResponse } from "@libs/api-gateway";
 import { StatusCodes } from "http-status-codes";
-import { APIGatewayEvent } from "aws-lambda";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { APIGatewayEvent } from "aws-lambda";
 
-const importProductFile = async (event: APIGatewayEvent, _context, callback) => {
+const importProductFile = async (event, _context, callback) => {
   console.log(`[importProductFile] ${JSON.stringify(event)}`);
 
-  const { name } = event.queryStringParameters;
+  const { name } = (<APIGatewayEvent>event).queryStringParameters;
 
   if (!name) {
     return formatJSONResponse(
