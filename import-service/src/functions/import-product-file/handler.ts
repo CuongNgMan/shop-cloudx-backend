@@ -2,6 +2,7 @@ import { formatJSONResponse } from "@libs/api-gateway";
 import { StatusCodes } from "http-status-codes";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import EnvConfig from "@libs/config";
 import { APIGatewayEvent } from "aws-lambda";
 
 const importProductFile = async (event, _context, callback) => {
@@ -23,7 +24,7 @@ const importProductFile = async (event, _context, callback) => {
     const client = new S3Client();
 
     const command = new PutObjectCommand({
-      Bucket: process.env.PRODUCT_FILE_BUCKET_NAME,
+      Bucket: EnvConfig.productFileBucketName,
       Key: `uploaded/${name}`,
       ContentType: "text/csv",
     });
