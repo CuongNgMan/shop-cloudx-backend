@@ -3,6 +3,9 @@ import type { AWS } from "@serverless/typescript";
 import importProductFile from "@functions/import-product-file";
 import importFileParser from "@functions/import-file-parser";
 
+// "Fn::Sub": "https://sqs.${AWS::Region}.amazonaws.com/${AWS::AccountId}/${SQSCataLogItems}",
+// "Fn::Sub": "arn:aws:sqs:${AWS::Region}:${AWS::AccountId}:${SQSCataLogItems}",
+
 const serverlessConfiguration: AWS = {
   org: "cngman",
   app: "shop-cloudx-epam",
@@ -20,6 +23,11 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+      CATALOG_ITEMS_QUEUE_URL: {
+        "Fn::ImportValue": {
+          "Fn::Sub": "shop-cloudx-backend-${opt:stage}-QueueURL",
+        },
+      },
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
     httpApi: {
@@ -31,13 +39,26 @@ const serverlessConfiguration: AWS = {
         allowCredentials: true,
       },
     },
-    iamRoleStatements: [
-      {
-        Effect: "Allow",
-        Action: "s3:*",
-        Resource: "arn:aws:s3:::${self:custom.s3product.bucketName}/*",
+    iam: {
+      role: {
+        statements: [
+          {
+            Effect: "Allow",
+            Action: "s3:*",
+            Resource: "arn:aws:s3:::${self:custom.s3product.bucketName}/*",
+          },
+          {
+            Effect: "Allow",
+            Action: "sqs:*",
+            Resource: {
+              "Fn::ImportValue": {
+                "Fn::Sub": "shop-cloudx-backend-${opt:stage}-QueueARN",
+              },
+            },
+          },
+        ],
       },
-    ],
+    },
   },
   functions: { importProductFile, importFileParser },
   package: { individually: true },
