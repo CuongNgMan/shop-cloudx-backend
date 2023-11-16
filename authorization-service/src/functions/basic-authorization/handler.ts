@@ -24,7 +24,7 @@ const basicAuthorizer = async (event, _context, callback) => {
     const expectedPassword = process.env[providedUsername];
     const effect = expectedPassword && expectedPassword === providedPassword ? "Allow" : "Deny";
     const policy = {
-      encodedCredentials,
+      principalId: encodedCredentials,
       policyDocument: {
         Version: "2012-10-17",
         Statement: [
