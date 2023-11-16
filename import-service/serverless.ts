@@ -38,6 +38,15 @@ const serverlessConfiguration: AWS = {
         maxAge: 86400,
         allowCredentials: true,
       },
+      authorizers: {
+        tokenAuthorizer: {
+          type: "request",
+          functionArn: "arn:aws:lambda:eu-west-1:392402011121:function:authorization-service-dev-basicAuthorization",
+          resultTtlInSeconds: 0,
+          identitySource: "$request.header.Authorization",
+          name: "tokenAuthorizer",
+        },
+      },
     },
     iam: {
       role: {
