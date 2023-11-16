@@ -41,7 +41,7 @@ const serverlessConfiguration: AWS = {
       authorizers: {
         tokenAuthorizer: {
           type: "request",
-          functionArn: "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:authorization-service-dev-basicAuthorization",
+          functionArn: { "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:authorization-service-${opt:stage}-basicAuthorization" },
           resultTtlInSeconds: 0,
           identitySource: "$request.header.Authorization",
           name: "tokenAuthorizer",
